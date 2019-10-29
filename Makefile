@@ -1,10 +1,11 @@
 NAME	= fdf
-SRC		= main.c 
+SRC		= dot.c main.c
 OBJ		= $(SRC:.c=.o)
 
 
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
+CPPFLAGS = -Iincludes
 
 LIBXINCLUDES = -I /usr/local/include
 XFLAGS = -framework OpenGL -framework AppKit
@@ -13,20 +14,21 @@ LIBX = -L /usr/local/lib/ -lmlx
 LIBFLAGS = -I libft/includes
 LIBFT	= -L libft -lft
 
+
 GREEN = \033[0;32m
 RED = \033[0;31m
 WHITE = \033[0m
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ) header.h
-	$(CC) $(CFLAGS) $(LIBXINCLUDES) $(LIBFLAGS) $(LIBX) $(XFLAGS) $(LIBFT) -o $@ $(SRC) && echo "$(GREEN)$@ compiled to date$(WHITE)"
+$(NAME): $(LIBFT) $(OBJ)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LIBXINCLUDES) $(LIBFLAGS) $(LIBX) $(XFLAGS) $(LIBFT) -o $@ $(SRC) && echo "$(GREEN)$@ compiled to date$(WHITE)"
 
 $(LIBFT) :
 	$(MAKE) -C libft
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(LIBXINCLUDES) $(LIBFLAGS) $(LIBX) $(XFLAGS) $(LIBFT) -o $@ $^ && echo "$(GREEN)$@$(WHITE)"
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LIBFLAGS)  -o $@ -c $^ && echo "$(GREEN)$@$(WHITE)"
 
 clean:
 	$(MAKE) -C libft/ clean
@@ -42,5 +44,5 @@ re: fclean all
 
 //.SILENT: all $(NAME) clean fclean re
 
-run:
-	$(CC) $(CCFLAGS) $(MINILIBXFLAGS) $(LIBFLAGS) $(MINILIBX) $(LIBFT) main.c  -o $(NAME) && ./$(NAME)
+run: $(NAME)
+	./$(NAME) run
