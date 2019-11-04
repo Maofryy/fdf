@@ -6,7 +6,7 @@
 /*   By: mbenhass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 10:43:59 by mbenhass          #+#    #+#             */
-/*   Updated: 2019/11/04 13:15:03 by mbenhass         ###   ########.fr       */
+/*   Updated: 2019/11/04 13:49:12 by mbenhass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_map			*ft_parsemap(char *str, t_map *map);
 void			ft_map_display(t_map *map);
 void			ft_process_line(t_map *map);
 int				ft_hook_keys(int key, t_map *map);
-int				ft_re_draw(int key, t_map *map);
+int				ft_re_draw(t_map *map);
 void			ft_free_tab(char ***s);
 
 #endif

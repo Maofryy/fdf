@@ -6,7 +6,7 @@
 #    By: mbenhass <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/04 10:38:35 by mbenhass          #+#    #+#              #
-#    Updated: 2019/11/04 12:05:42 by mbenhass         ###   ########.fr        #
+#    Updated: 2019/11/04 13:45:23 by mbenhass         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,12 @@ NAME := fdf
 LIBFT = libft/libft.a
 
 CGLAGS := -Wall -Wextra -Werror -Ofast -march=native
-LCFLAGS := -L./minilibx_macos -lmlx -framework OpenGL \
-		-framework Appkit
+#LCFLAGS := -L./minilibx_macos -lmlx -framework OpenGL -framework Appkit
+LCFLAGS := -L /usr/local/lib -lmlx -framework OpenGL -framework Appkit
 
 
-INCLUDES := -I./minilibx_macos -I./includes -I./libft/includes
+#INCLUDES := -I./minilibx_macos -I./includes -I./libft/includes
+INCLUDES := -I./usr/local/include -I./includes -I./libft/includes
 
 SRCS := main.c \
 		ft_parse.c \
@@ -37,7 +38,7 @@ all : $(LIBFT) $(NAME)
 
 $(LIBFT) :
 	make -C libft/
-	make -C minilibx_macos/
+	#make -C minilibx_macos/
 
 
 $(NAME): $(OBJS) ./includes/fdf.h ./includes/key_codes_macos.h

@@ -6,7 +6,7 @@
 /*   By: mbenhass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 10:41:48 by mbenhass          #+#    #+#             */
-/*   Updated: 2019/11/04 13:24:45 by mbenhass         ###   ########.fr       */
+/*   Updated: 2019/11/04 13:53:46 by mbenhass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,9 @@ int				ft_hook_keys(int key, t_map *map)
 	return (0);
 }
 
-int				ft_re_draw(int key, t_map *map)
+int				ft_re_draw(t_map *map)
 {
-	//map->posx += 10;
-	ft_putstr("\nExposed\n");
+	mlx_clear_window(map->mlx, map->win);
+	mlx_put_image_to_window(map->mlx, map->win, map->image, map->posx, map->posy);
 	return (0);
 }
