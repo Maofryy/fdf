@@ -1,48 +1,58 @@
-NAME	= fdf
-SRC		= dot.c main.c
-OBJ		= $(SRC:.c=.o)
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mbenhass <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/11/04 10:38:35 by mbenhass          #+#    #+#              #
+#    Updated: 2019/11/04 10:50:09 by mbenhass         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 
-CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
-CPPFLAGS = -Iincludes
+NAME := fdf
 
-LIBXINCLUDES = -I /usr/local/include
-XFLAGS = -framework OpenGL -framework AppKit
-LIBX = -L /usr/local/lib/ -lmlx
+LIBFT = libft/libft.a
 
-LIBFLAGS = -I libft/includes
-LIBFT	= -L libft -lft
+CGLAGS := -Wall -Wextra -Werror -Ofast -march=native
+LCFLAGS := -L./minilibx_macos -lmlx -framework OpenGL \
+		-framework Appkit
 
 
-GREEN = \033[0;32m
-RED = \033[0;31m
-WHITE = \033[0m
+INCLUDES := -I./minilibx_macos -I./includes -I./libft/includes
 
-all: $(NAME)
+SRCS := main.c \
+		ft_parse.c \
+		ft_map.c \
+		ft_process_line.c \
+		ft_hook_keys.c
 
-$(NAME): $(LIBFT) $(OBJ)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LIBXINCLUDES) $(LIBFLAGS) $(LIBX) $(XFLAGS) $(LIBFT) -o $@ $(SRC) && echo "$(GREEN)$@ compiled to date$(WHITE)"
+SRCSP := $(addprefix ./srcs/,  $(SRCS))
+OBJS = $(SRCS:.c=.o)
+OBJSP = $(addprefix ./objs/, $(SRCS:.c=.o))
+OBJS = $(SRCSP:.c=.o)
+
+all : $(LIBFT) $(NAME)
 
 $(LIBFT) :
-	$(MAKE) -C libft
+	make -C libft/
+	make -C minilibx_macos/
 
-%.o: %.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LIBFLAGS)  -o $@ -c $^ && echo "$(GREEN)$@$(WHITE)"
 
-clean:
-	$(MAKE) -C libft/ clean
-	/bin/rm -f $(OBJ)
+$(NAME): $(OBJS)
+	gcc $(LCFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INCLUDES)
 
-fclean: clean
-	$(MAKE) -C libft/ fclean
-	/bin/rm -f $(NAME)
+%.o : %.c
+	gcc $(CFLAGS)  $(INCLUDES) -c -o $@ $<
 
-re: fclean all
+clean :
+	make -C libft/ clean
+	make -C minilibx_macos/ clean
+	rm -rf $(OBJSP) $(OBJS)
 
-.PHONY: all clean fclean re
+fclean : clean
+	make -C libft/ fclean
+	rm -rf $(NAME)
 
-//.SILENT: all $(NAME) clean fclean re
-
-run: $(NAME)
-	./$(NAME) run
+re : fclean all
