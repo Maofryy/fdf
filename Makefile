@@ -6,22 +6,20 @@
 #    By: mbenhass <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/04 10:38:35 by mbenhass          #+#    #+#              #
-#    Updated: 2019/11/04 13:45:23 by mbenhass         ###   ########.fr        #
+#    Updated: 2019/11/04 14:11:01 by mbenhass         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 NAME := fdf
 
 LIBFT = libft/libft.a
 
+CC = gcc
 CGLAGS := -Wall -Wextra -Werror -Ofast -march=native
-#LCFLAGS := -L./minilibx_macos -lmlx -framework OpenGL -framework Appkit
-LCFLAGS := -L /usr/local/lib -lmlx -framework OpenGL -framework Appkit
+LCFLAGS := -L./minilibx_macos -lmlx -framework OpenGL -framework Appkit
 
 
-#INCLUDES := -I./minilibx_macos -I./includes -I./libft/includes
-INCLUDES := -I./usr/local/include -I./includes -I./libft/includes
+INCLUDES := -I./minilibx_macos -I./includes -I./libft/includes
 
 SRCS := main.c \
 		ft_parse.c \
@@ -30,30 +28,30 @@ SRCS := main.c \
 		ft_hook_keys.c
 
 SRCSP := $(addprefix ./srcs/,  $(SRCS))
-OBJS = $(SRCS:.c=.o)
-OBJSP = $(addprefix ./objs/, $(SRCS:.c=.o))
+#OBJS = $(SRCS:.c=.o)
 OBJS = $(SRCSP:.c=.o)
 
-all : $(LIBFT) $(NAME)
+all : $(NAME)
+
+$(NAME): $(LIBFT) $(OBJS) ./includes/fdf.h ./includes/key_codes_macos.h
+	$(CC) $(CFLAGS) $(INCLUDES) $(LCFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
 
 $(LIBFT) :
-	make -C libft/
-	#make -C minilibx_macos/
-
-
-$(NAME): $(OBJS) ./includes/fdf.h ./includes/key_codes_macos.h
-	gcc $(LCFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INCLUDES)
+	$(MAKE) -C libft/
+	$(MAKE) -C minilibx_macos/
 
 %.o : %.c
-	gcc $(CFLAGS)  $(INCLUDES) -c -o $@ $<
+	$(CC) $(CFLAGS)  $(INCLUDES) -c -o $@ $<
 
 clean :
-	make -C libft/ clean
-	make -C minilibx_macos/ clean
-	rm -rf $(OBJSP) $(OBJS)
+	$(MAKE) -C libft/ clean
+	$(MAKE) -C minilibx_macos/ clean
+	/bin/rm -rf $(OBJSP) $(OBJS)
 
 fclean : clean
-	make -C libft/ fclean
-	rm -rf $(NAME)
+	$(MAKE) -C libft/ fclean
+	/bin/rm -rf $(NAME)
 
 re : fclean all
+
+.SILENT : all $(NAME) $(LIBFT) clean fclean  

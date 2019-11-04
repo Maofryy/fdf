@@ -6,13 +6,13 @@
 /*   By: mbenhass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 10:42:18 by mbenhass          #+#    #+#             */
-/*   Updated: 2019/11/04 11:32:48 by mbenhass         ###   ########.fr       */
+/*   Updated: 2019/11/04 14:02:52 by mbenhass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_free_tab(char ***s/*, void (*f) (void *)*/)
+void		ft_free_tab(char ***s)
 {
 	size_t	i;
 

@@ -6,7 +6,7 @@
 /*   By: mbenhass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 10:42:26 by mbenhass          #+#    #+#             */
-/*   Updated: 2019/11/04 13:27:59 by mbenhass         ###   ########.fr       */
+/*   Updated: 2019/11/04 14:03:40 by mbenhass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ static void		ft_set_values(t_map *map, char *str)
 			map->length * 2, "FdF");
 }
 
+static int		ft_re_draw(t_map *map)
+{
+	mlx_clear_window(map->mlx, map->win);
+	mlx_put_image_to_window(map->mlx, map->win, map->image,
+		map->posx, map->posy);
+	return (0);
+}
+
 int				main(int argc, char **argv)
 {
 	t_map	*map;
@@ -55,7 +63,7 @@ int				main(int argc, char **argv)
 	ft_parsemap(argv[1], map);
 	ft_map_display(map);
 	mlx_expose_hook(map->win, ft_re_draw, map);
-	//mlx_hook(map->win, KEYPRESS, KEYRELEASE, ft_hook_keys, map);
+	mlx_hook(map->win, KEYPRESS, KEYRELEASE, ft_hook_keys, map);
 	mlx_loop(map->mlx);
 	return (0);
 }
