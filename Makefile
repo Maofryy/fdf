@@ -6,7 +6,7 @@
 #    By: mbenhass <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/04 10:38:35 by mbenhass          #+#    #+#              #
-#    Updated: 2019/11/04 10:50:09 by mbenhass         ###   ########.fr        #
+#    Updated: 2019/11/04 12:05:42 by mbenhass         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ $(LIBFT) :
 	make -C minilibx_macos/
 
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) ./includes/fdf.h ./includes/key_codes_macos.h
 	gcc $(LCFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INCLUDES)
 
 %.o : %.c

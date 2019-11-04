@@ -6,13 +6,18 @@
 /*   By: mbenhass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 10:44:07 by mbenhass          #+#    #+#             */
-/*   Updated: 2019/11/04 10:45:23 by mbenhass         ###   ########.fr       */
+/*   Updated: 2019/11/04 12:03:39 by mbenhass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEY_CODES_MACOS_H
 # define KEY_CODES_MACOS_H
 
+
+
+# define KEYPRESS			2
+# define KEYRELEASE			3
+# define EXPOSE						12
 # define KEY_ESCAPE         53
 # define KEY_F1             122
 # define KEY_F2             120

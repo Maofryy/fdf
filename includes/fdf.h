@@ -6,7 +6,7 @@
 /*   By: mbenhass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 10:43:59 by mbenhass          #+#    #+#             */
-/*   Updated: 2019/11/04 10:53:21 by mbenhass         ###   ########.fr       */
+/*   Updated: 2019/11/04 13:15:03 by mbenhass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # include "libft.h"
 # include "key_codes_macos.h"
-# include "events.h"
+//# include "events.h"
 
 typedef struct	s_map
 {
@@ -32,6 +32,7 @@ typedef struct	s_map
 	void	*win;
 	void	*image;
 	void	*blackscreen;
+	int		exposed;
 	int		bpp;
 	int		endian;
 	int		size_line;
@@ -61,6 +62,7 @@ t_map			*ft_parsemap(char *str, t_map *map);
 void			ft_map_display(t_map *map);
 void			ft_process_line(t_map *map);
 int				ft_hook_keys(int key, t_map *map);
+int				ft_re_draw(int key, t_map *map);
 void			ft_free_tab(char ***s);
 
 #endif

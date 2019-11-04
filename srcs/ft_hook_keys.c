@@ -6,7 +6,7 @@
 /*   By: mbenhass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 10:41:48 by mbenhass          #+#    #+#             */
-/*   Updated: 2019/11/04 10:45:39 by mbenhass         ###   ########.fr       */
+/*   Updated: 2019/11/04 13:24:45 by mbenhass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,6 @@ int				ft_hook_keys(int key, t_map *map)
 		free(map);
 		exit(EXIT_SUCCESS);
 	}
-	else if (key == KEY_PAD_SUB)
-	{
-		map->zoom *= 2;
-		ft_reset_values(map);
-		ft_map_display(map);
-	}
 	else if (key == KEY_D)
 	{
 		map->blackscreen = mlx_new_image(map->mlx, map->width * 2,
@@ -108,5 +102,12 @@ int				ft_hook_keys(int key, t_map *map)
 		ft_map_display(map);
 	}
 	ft_hook_keys2(key, map);
+	return (0);
+}
+
+int				ft_re_draw(int key, t_map *map)
+{
+	//map->posx += 10;
+	ft_putstr("\nExposed\n");
 	return (0);
 }
